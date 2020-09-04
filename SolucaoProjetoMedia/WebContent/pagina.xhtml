@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	
+	<h:head/>
+	
+	<h:body>
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputLabel for="nome" value="Nome: "/>
+				<h:inputText id="nome" value="#{calcularMediaBean.nome}"/>
+				<h:outputLabel for="nota1" value="Primeira Nota: "/>
+				<h:inputText id="nota1" value="#{calcularMediaBean.nota1}"/>
+				<h:outputLabel for="nota2" value="Segunda Nota: "/>
+				<h:inputText id="nota2" value="#{calcularMediaBean.nota2}"/>
+				<h:commandButton action="#{calcularMediaBean.calcularMedia}" value="Calcular"/>
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<h:outputText value="Nome: "/> <br/>
+				<h:outputText value="#{calcularMediaBean.nome}"/> <br/>
+				<h:outputText value="Média: "/> <br/>
+				<h:outputText value="#{calcularMediaBean.media}"/> <br/>
+				<h:outputText value="Situacao: "/> <br/>
+				<h:outputText value="#{calcularMediaBean.situacao}"/> <br/>
+			</h:panelGrid>
+		</h:form>
+	</h:body>
+
+</html>

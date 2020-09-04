@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head />
+
+<h:body>
+	<h:form>
+		<p:fieldset legend="Cadastro">
+			<h:panelGrid columns="2">
+				<p:outputLabel for="nome" value="Nome: " />
+				<p:inputText id="nome" value="#{exibirDadosBean.nome}"/>
+				<p:outputLabel for="email" value="Email: " />
+				<p:inputText id="email" value="#{exibirDadosBean.email}"/>
+				<p:outputLabel for="senha" value="Senha: " />
+				<p:password id="senha" value="#{exibirDadosBean.senha}"/>
+				<p:outputLabel for="cidade" value="Cidade: " />
+				<p:selectOneMenu id="cidade" value="#{exibirDadosBean.cidade}">
+					<f:selectItem itemValue="" itemLabel="Selecione uma Cidade" />
+					<f:selectItems itemValue="#{cidade}" itemLabel="#{cidade}"
+						value="#{exibirDadosBean.cidades}" var="cidade" />
+				</p:selectOneMenu>
+				<p:outputLabel for="sexo" value="Sexo: " />
+				<p:selectOneRadio id="sexo" value="#{exibirDadosBean.sexo}">
+					<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+					<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+				</p:selectOneRadio>
+				<p:outputLabel for="videoGame" value="Video Game: " />
+				<p:selectManyCheckbox id="videoGame" value="#{exibirDadosBean.videoGames}">
+					<f:selectItem itemValue="Playstation 4" itemLabel="Playstation 4" />
+					<f:selectItem itemValue="Xbox One" itemLabel="Xbox One" />
+					<f:selectItem itemValue="Switch" itemLabel="Switch" />
+				</p:selectManyCheckbox>
+				<p:commandButton value="Cadastrar" ajax="false" action="#{exibirDadosBean.exibir}"/>
+			</h:panelGrid>
+			<p:dataTable value="#{exibirDadosBean.pessoas}" var="p">
+				<p:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{p.nome}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Email</f:facet>
+					<h:outputText value="#{p.email}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Cidade</f:facet>
+					<h:outputText value="#{p.cidade}"/>
+				</p:column>
+			</p:dataTable>
+		</p:fieldset>
+	</h:form>
+</h:body>
+
+</html>
