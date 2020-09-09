@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Entendendo Ajax</title>
+</h:head>
+<h:body>
+<p:messages id="mensagem"/>
+	<h:form>
+		<p:fieldset legend="Cadastrar">
+			<h:panelGrid columns="2">
+				<p:outputLabel for="nome" value="Nome: "/>
+				<p:inputText id="nome" value="#{criptografarBean.nome}"/>
+				<p:commandButton value="Criptografar" action="#{criptografarBean.criptografar}" update="nomeCriptografado"/>
+				<p:commandButton value="Validar" action="#{criptografarBean.validar}" update="mensagem selectNomes" process="nome @this"/>
+				<p:selectOneMenu value="#{criptografarBean.nomeComboBox}" id="selectNomes">
+					<p:ajax listener="#{criptografarBean.exibirNome}" event="change"/>
+					<f:selectItems value="#{criptografarBean.nomes}" var="nome" itemValue="#{nome}" itemLabel="#{nome}"/>
+				</p:selectOneMenu>
+			</h:panelGrid>
+		</p:fieldset>
+	</h:form>
+	<h:outputText value="#{criptografarBean.nomeCriptografado}" id="nomeCriptografado"/>
+</h:body>
+</html>
