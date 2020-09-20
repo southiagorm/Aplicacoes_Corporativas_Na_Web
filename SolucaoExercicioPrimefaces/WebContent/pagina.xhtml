@@ -3,45 +3,77 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Exercício Primefaces</title>
-</h:head>
-<h:body>
-	<h:form>
-		<p:fieldset legend="Cadastro">
-			<h:panelGrid columns="2">
-				<p:outputLabel for="nome" value="Nome: "/>
-				<p:inputText id="nome" value="#{cadastroBean.pessoa.nome}"/>
-				<p:outputLabel for="email" value="Email: "/>
-				<p:inputText id="email" value="#{cadastroBean.pessoa.email}"/>
-				<p:outputLabel for="dataNascimento" value="Data Nascimento: "/>
-				<p:calendar id="dataNascimento" value="#{cadastroBean.pessoa.dataNascimento}">
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-				</p:calendar>
-				<p:outputLabel for="cpf" value="Cpf: "/>
-				<p:inputMask id="cpf" mask="999.999.999-99" value="#{cadastroBean.pessoa.cpf}"/>
-				<p:commandButton value="Enviar" action="#{cadastroBean.cadastrarPessoa}" ajax="false"/>
-			</h:panelGrid>
-		</p:fieldset>
-	</h:form>
-	
-	<p:dataTable value="#{cadastroBean.pessoas}" var="pessoa">
-		<p:column headerText="Nome">
-			<h:outputText value="${pessoa.nome}"/>
-		</p:column>
-		<p:column headerText="Email">
-			<h:outputText value="${pessoa.email}"/>
-		</p:column>
-		<p:column headerText="Data Nascimento">
-			<h:outputText value="${pessoa.dataNascimento}">
-				<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-			</h:outputText>
-		</p:column>
-		<p:column headerText="Cpf">
-			<h:outputText value="${pessoa.cpf}"/>
-		</p:column>
-	</p:dataTable>
-</h:body>
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/WEB-INF/templates/_template.xhtml">
+
+	<ui:define name="titulo">Página de Cadastro</ui:define>
+
+	<ui:define name="principal">
+		<p:messages id="messages" closable="true" showDetail="true">
+			<p:autoUpdate />
+		</p:messages>
+		<p:growl id="growl">
+			<p:autoUpdate />
+		</p:growl>
+		<h:form id="formPessoa">
+			<p:menubar autoDisplay="false">
+				<p:submenu label="Pessoas">
+					<p:menuitem value="Novo"/>
+				</p:submenu>
+				<p:submenu label="Dados do Usuário">
+					<p:menuitem value="Cadastro"/>
+				</p:submenu>
+				<p:menuitem value="Sair"/>
+			</p:menubar>
+			<p:fieldset legend="Cadastro">
+				<h:panelGrid columns="2">
+					<p:outputLabel for="nome" value="Nome: " />
+					<p:inputText id="nome" value="#{cadastroBean.pessoa.nome}"
+						required="true" requiredMessage="Informe o nome da Pessoa" />
+					<p:outputLabel for="email" value="Email: " />
+					<p:inputText id="email" value="#{cadastroBean.pessoa.email}" />
+					<p:outputLabel for="dataNascimento" value="Data Nascimento: " />
+					<p:calendar id="dataNascimento"
+						value="#{cadastroBean.pessoa.dataNascimento}">
+						<f:convertDateTime pattern="dd/MM/yyyy"
+							timeZone="America/Sao_Paulo" />
+					</p:calendar>
+					<p:outputLabel for="cpf" value="Cpf: " />
+					<p:inputMask id="cpf" mask="999.999.999-99"
+						value="#{cadastroBean.pessoa.cpf}" />
+					<p:commandButton value="Enviar"
+						action="#{cadastroBean.cadastrarPessoa}" update="tabelaPessoas" />
+				</h:panelGrid>
+			</p:fieldset>
+			<p:dataTable value="#{cadastroBean.pessoas}" var="pessoa"
+				id="tabelaPessoas" rows="5" paginator="true"
+				paginatorPosition="bottom">
+				<p:column sortBy="#{pessoa.nome}" headerText="Nome">
+					<h:outputText value="${pessoa.nome}" />
+				</p:column>
+				<p:column headerText="Email">
+					<h:outputText value="${pessoa.email}" />
+				</p:column>
+				<p:column headerText="Data Nascimento">
+					<h:outputText value="${pessoa.dataNascimento}">
+						<f:convertDateTime pattern="dd/MM/yyyy"
+							timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+				<p:column sortBy="#{pessoa.cpf}" headerText="Cpf">
+					<h:outputText value="${pessoa.cpf}" />
+				</p:column>
+				<p:column headerText="Opções">
+					<p:commandLink value="Deletar "
+						action="#{cadastroBean.deletarPessoa(pessoa)}"
+						update="tabelaPessoas" />
+					<p:commandLink value="Alterar"
+						action="#{cadastroBean.alterarPessoa(pessoa)}" update="formPessoa" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title><ui:insert name="titulo">Texto Padrão</ui:insert></title>
+	<style>
+		header{
+			background-color: #ccc;
+			margin: 0px 0px 10px 0px;
+			box-shadow: 2px 2px 10px #000000;
+		}
+		#cabecalho{
+			padding-left: 10px;
+		}
+	</style>
+</h:head>
+
+<h:body>
+	<header>
+		<div id="cabecalho">
+			<h:graphicImage library="images" name="logo.png" width="70"/>
+		</div>
+	</header>
+	
+	<main>
+		<div id="principal">
+			<ui:insert name="principal">
+			
+			</ui:insert>
+		</div>
+	</main>
+	
+	<footer>
+		<h:outputText value="@Copyright"/>
+	</footer>
+</h:body>
+
+</html>
