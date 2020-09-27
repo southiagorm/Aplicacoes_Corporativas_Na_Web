@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Insert title here</title>
+</h:head>
+
+<h:body>
+	<p:dataTable value="#{listarBean.alunos}" var="aluno">
+		<p:column headerText="Nome">
+			<h:outputText value="#{aluno.nome}"/>
+		</p:column>
+		<p:column headerText="Primeira Nota">
+			<h:outputText value="#{aluno.nota1}"/>
+		</p:column>
+		<p:column headerText="Segunda Nota">
+			<h:outputText value="#{aluno.nota2}"/>
+		</p:column>
+		<p:column headerText="Média">
+			<h:outputText value="#{aluno.media}"/>
+		</p:column>
+		<p:column headerText="Situação">
+			<h:outputText value="#{aluno.situacao}"/>
+		</p:column>
+	</p:dataTable> <br/>
+	<p:link value="Cadastrar" outcome="cadastrar"/>
+</h:body>
+
+</html>
