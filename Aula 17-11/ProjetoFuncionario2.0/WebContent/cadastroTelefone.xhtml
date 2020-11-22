@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="WEB-INF/template/_templateGenerico.xhtml">
+
+	<ui:define name="titulo">Cadastro Telefone</ui:define>
+
+	<ui:define name="titulo_pagina">Cadastro Telefone</ui:define>
+
+	<ui:define name="conteudo">
+		<p:messages closable="true" id="message"/>
+		<h:form>
+			<p:panelGrid columns="2">
+				<p:outputLabel for="codigo" value="Código Área" />
+				<p:inputText id="codigo"
+					value="#{cadastrarTelefoneBean.telefone.codigoArea}" />
+				<p:outputLabel for="numero" value="Número: " />
+				<p:inputText id="numero"
+					value="#{cadastrarTelefoneBean.telefone.numeroTelefone}" />
+				<p:outputLabel for="tipoTelefone" value="Tipo Telefone:" />
+				<p:selectOneMenu value="#{cadastrarTelefoneBean.tipoTelefone}"
+					id="tipoTelefone">
+					<f:ajax listener="#{cadastrarTelefoneBean.pegarTipoTelefone}" event="change"/>
+					<f:selectItem itemLabel="Selecione o Tipo do Telefone" itemValue=""></f:selectItem>
+					<f:selectItem itemLabel="Residencial" itemValue="RESIDENCIAL" />
+					<f:selectItem itemLabel="Celular" itemValue="CELULAR" />
+				</p:selectOneMenu>
+				<p:outputLabel for="funcionario" value="Funcionário:" />
+				<p:selectOneMenu value="#{cadastrarTelefoneBean.funcionarioId}" id="funcionario">
+					<f:ajax listener="#{cadastrarTelefoneBean.pegarFuncionario}" event="change"/>
+					<f:selectItem itemLabel="Selecione o Funcionário" itemValue=""></f:selectItem>
+					<f:selectItems var="f" value="#{cadastrarTelefoneBean.funcionarios}" itemLabel="#{f.nome}" itemValue="#{f.id}"/>
+				</p:selectOneMenu>
+				<p:commandButton value="Cadastrar" action="#{cadastrarTelefoneBean.save}" update="message @form"/>
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+
+</html>
